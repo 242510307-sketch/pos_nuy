@@ -262,7 +262,7 @@
 
                                         {{-- HAPUS --}}
                                         <form
-                                            action="{{ route('admin.users.destroy', $user) }}"
+                                            action="{{ route('admin.users.destroy', $user->id) }}"
                                             method="POST"
                                             class="d-inline"
                                         >

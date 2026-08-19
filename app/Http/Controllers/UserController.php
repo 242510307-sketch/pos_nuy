@@ -7,10 +7,7 @@ use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use PHPUnit\Event\TestSuite\Sorted;
-use Symfony\Component\HttpKernel\HttpCache\Store;
 
 class UserController extends Controller
 {
@@ -104,8 +101,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        try {
+            $user->delete();
 
-        return back()->with('success', 'User deleted');
+            return back()->with('success', 'User berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            return back()->with(
+                'error',
+                'User tidak dapat dihapus karena masih memiliki data penjualan.'
+            );
+        }
     }
 }

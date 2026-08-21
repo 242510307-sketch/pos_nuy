@@ -328,7 +328,7 @@
 
                                         <i class="bi bi-tag-fill text-primary me-1"></i>
 
-                                        {{ $product->jenis ?? '-' }}
+                                        {{ $product->jenis?->nama_jenis ?? '-' }}
 
                                     </span>
 

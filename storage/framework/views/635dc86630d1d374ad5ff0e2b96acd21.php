@@ -322,7 +322,7 @@
 
                                         <i class="bi bi-tag-fill text-primary me-1"></i>
 
-                                        <?php echo e($product->jenis ?? '-'); ?>
+                                        <?php echo e($product->jenis?->nama_jenis ?? '-'); ?>
 
 
                                     </span>
@@ -511,4 +511,5 @@
 </div>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\pos_nuy\resources\views/produk/index.blade.php ENDPATH**/ ?>

@@ -60,13 +60,8 @@ class ProdukController extends Controller
         $data['user_id'] = Auth::id();
         $data['nama'] = $dataReq['name'];
 
-        // Jenis baru
-        $data['jenis_id'] = $dataReq['jenis_id'];
-
-        // Tetap mengisi kolom jenis lama
-        // agar data lama tidak terganggu
-        $jenis = Jenis::findOrFail($dataReq['jenis_id']);
-        $data['jenis'] = $jenis->nama_jenis;
+        // Jenis menggunakan relasi jenis_id
+        $data['jenis_id'] = $dataReq['jenis_id'] ?? null;
 
         $data['harga_beli'] = $dataReq['purchase_price'];
         $data['harga_jual'] = $dataReq['selling_price'];
@@ -111,17 +106,12 @@ class ProdukController extends Controller
 
         $dataReq = $request->validated();
 
-        $jenis = Jenis::findOrFail($dataReq['jenis_id']);
-
         $data = [
             'user_id'    => Auth::id(),
             'nama'       => $dataReq['name'],
 
-            // Jenis baru
-            'jenis_id'   => $dataReq['jenis_id'],
-
-            // Tetap mengisi kolom jenis lama
-            'jenis'      => $jenis->nama_jenis,
+            // Jenis menggunakan relasi jenis_id
+            'jenis_id'   => $dataReq['jenis_id'] ?? null,
 
             'harga_beli' => $dataReq['purchase_price'],
             'harga_jual' => $dataReq['selling_price'],

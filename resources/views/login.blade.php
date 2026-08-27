@@ -9,7 +9,13 @@
 <style>
     /* Styling Biru Pastel Lucu */
     body {
-        background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%) !important;
+        background: linear-gradient(
+            135deg,
+            #3f7fc4 0%,
+            #5b9bd5 45%,
+            #a9cfee 75%,
+            #dbeeff 100%
+        ) !important;
         min-height: 100vh;
     }
 

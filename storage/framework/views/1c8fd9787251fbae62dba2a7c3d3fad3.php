@@ -9,7 +9,13 @@
 <style>
     /* Styling Biru Pastel Lucu */
     body {
-        background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%) !important;
+        background: linear-gradient(
+            135deg,
+            #3f7fc4 0%,
+            #5b9bd5 45%,
+            #a9cfee 75%,
+            #dbeeff 100%
+        ) !important;
         min-height: 100vh;
     }
 
@@ -138,4 +144,5 @@ unset($__errorArgs, $__bag); ?>
 </div>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\pos_nuy\resources\views/login.blade.php ENDPATH**/ ?>

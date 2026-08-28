@@ -1,20 +1,19 @@
-@extends('layouts.app')
 
-@section('title', 'POS')
 
-@section('content')
+<?php $__env->startSection('title', 'POS'); ?>
+
+<?php $__env->startSection('content'); ?>
 
 <div class="container-fluid">
 
-    {{-- =========================================================
-        ALERT ERROR
-    ========================================================== --}}
-    @if (session('errors'))
+    
+    <?php if(session('errors')): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
 
             <i class="bi bi-exclamation-triangle-fill me-1"></i>
 
-            {{ session('errors') }}
+            <?php echo e(session('errors')); ?>
+
 
             <button
                 type="button"
@@ -23,18 +22,17 @@
             ></button>
 
         </div>
-    @endif
+    <?php endif; ?>
 
 
-    {{-- =========================================================
-        ALERT SUCCESS
-    ========================================================== --}}
-    @if (session('success'))
+    
+    <?php if(session('success')): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
 
             <i class="bi bi-check-circle-fill me-1"></i>
 
-            {{ session('success') }}
+            <?php echo e(session('success')); ?>
+
 
             <button
                 type="button"
@@ -43,28 +41,24 @@
             ></button>
 
         </div>
-    @endif
+    <?php endif; ?>
 
 
-    {{-- =========================================================
-        JUDUL
-    ========================================================== --}}
+    
     <h4 class="mb-3">
 
-        @if ($mode === 'edit')
+        <?php if($mode === 'edit'): ?>
             Edit Penjualan
-        @else
+        <?php else: ?>
             Tambah Penjualan
-        @endif
+        <?php endif; ?>
 
     </h4>
 
 
     <div class="row">
 
-        {{-- =====================================================
-            PRODUK
-        ====================================================== --}}
+        
         <div class="col-md-6">
 
             <div class="card">
@@ -74,18 +68,18 @@
                     style="max-height:70vh; overflow:auto"
                 >
 
-                    {{-- SEARCH PRODUK --}}
+                    
                     <div class="mb-3">
 
                         <form
                             method="GET"
-                            action="{{ route('penjualan.create') }}"
+                            action="<?php echo e(route('penjualan.create')); ?>"
                         >
 
                             <input
                                 type="text"
                                 name="search"
-                                value="{{ request('search') }}"
+                                value="<?php echo e(request('search')); ?>"
                                 class="form-control"
                                 placeholder="Cari produk..."
                                 onkeyup="this.form.submit()"
@@ -96,45 +90,45 @@
                     </div>
 
 
-                    {{-- DAFTAR PRODUK --}}
-                    @forelse ($products as $product)
+                    
+                    <?php $__empty_1 = true; $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 
                         <form
                             method="POST"
-                            action="{{ route('itempenjualan.store') }}"
+                            action="<?php echo e(route('itempenjualan.store')); ?>"
                             class="row mb-2"
                         >
 
-                            @csrf
+                            <?php echo csrf_field(); ?>
 
                             <input
                                 type="hidden"
                                 name="product_id"
-                                value="{{ $product->id }}"
+                                value="<?php echo e($product->id); ?>"
                             >
 
 
-                            {{-- NAMA PRODUK --}}
+                            
                             <div class="col-7">
 
                                 <button
                                     type="button"
                                     class="btn btn-outline-primary w-100 text-start p-2
-                                    {{ $sale->status === 'COMPLETED' ? 'disabled' : '' }}"
+                                    <?php echo e($sale->status === 'COMPLETED' ? 'disabled' : ''); ?>"
                                 >
 
                                     <div class="d-flex align-items-center gap-2">
 
-                                        @if ($product->foto)
+                                        <?php if($product->foto): ?>
 
                                             <img
-                                                src="{{ asset('storage/' . $product->foto) }}"
-                                                alt="{{ $product->nama }}"
+                                                src="<?php echo e(asset('storage/' . $product->foto)); ?>"
+                                                alt="<?php echo e($product->nama); ?>"
                                                 class="rounded-circle"
                                                 style="width:45px; height:45px; object-fit:cover"
                                             >
 
-                                        @else
+                                        <?php else: ?>
 
                                             <div
                                                 class="rounded-circle bg-light d-flex align-items-center justify-content-center"
@@ -143,17 +137,19 @@
                                                 <i class="bi bi-image text-muted"></i>
                                             </div>
 
-                                        @endif
+                                        <?php endif; ?>
 
 
                                         <div>
 
                                             <div class="fw-semibold">
-                                                {{ $product->nama }}
+                                                <?php echo e($product->nama); ?>
+
                                             </div>
 
                                             <small class="text-muted">
-                                                Rp {{ number_format($product->harga_jual, 0, ',', '.') }}
+                                                Rp <?php echo e(number_format($product->harga_jual, 0, ',', '.')); ?>
+
                                             </small>
 
                                         </div>
@@ -165,7 +161,7 @@
                             </div>
 
 
-                            {{-- QUANTITY --}}
+                            
                             <div class="col-3">
 
                                 <input
@@ -173,21 +169,23 @@
                                     name="quantity"
                                     value="1"
                                     min="1"
-                                    max="{{ $product->stok }}"
+                                    max="<?php echo e($product->stok); ?>"
                                     class="form-control"
-                                    {{ $sale->status === 'COMPLETED' ? 'disabled' : '' }}
+                                    <?php echo e($sale->status === 'COMPLETED' ? 'disabled' : ''); ?>
+
                                 >
 
                             </div>
 
 
-                            {{-- TAMBAH --}}
+                            
                             <div class="col-2">
 
                                 <button
                                     type="submit"
                                     class="btn btn-primary w-100"
-                                    {{ $sale->status === 'COMPLETED' ? 'disabled' : '' }}
+                                    <?php echo e($sale->status === 'COMPLETED' ? 'disabled' : ''); ?>
+
                                 >
                                     +
                                 </button>
@@ -196,7 +194,7 @@
 
                         </form>
 
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
 
                         <div class="text-center text-muted py-4">
 
@@ -206,7 +204,7 @@
 
                         </div>
 
-                    @endforelse
+                    <?php endif; ?>
 
                 </div>
 
@@ -215,9 +213,7 @@
         </div>
 
 
-        {{-- =====================================================
-            KERANJANG
-        ====================================================== --}}
+        
         <div class="col-md-6">
 
             <div class="card">
@@ -251,20 +247,19 @@
 
                         <tbody>
 
-                            @forelse ($sale->itemPenjualan as $item)
+                            <?php $__empty_1 = true; $__currentLoopData = $sale->itemPenjualan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
 
                                 <tr>
 
-                                    {{-- =================================================
-                                        PRODUK
-                                    ================================================== --}}
+                                    
                                     <td>
 
-                                        @if ($item->produk)
+                                        <?php if($item->produk): ?>
 
-                                            {{ $item->produk->nama }}
+                                            <?php echo e($item->produk->nama); ?>
 
-                                        @else
+
+                                        <?php else: ?>
 
                                             <span class="text-danger">
 
@@ -275,79 +270,76 @@
                                             </span>
 
                                             <small class="d-block text-muted">
-                                                ID Produk: {{ $item->produk_id }}
+                                                ID Produk: <?php echo e($item->produk_id); ?>
+
                                             </small>
 
-                                        @endif
+                                        <?php endif; ?>
 
                                     </td>
 
 
-                                    {{-- =================================================
-                                        QTY
-                                    ================================================== --}}
+                                    
                                     <td>
 
-                                        @if ($item->produk && $sale->status === 'OPEN')
+                                        <?php if($item->produk && $sale->status === 'OPEN'): ?>
 
                                             <form
                                                 method="POST"
-                                                action="{{ route('itempenjualan.update', $item->id) }}"
+                                                action="<?php echo e(route('itempenjualan.update', $item->id)); ?>"
                                             >
 
-                                                @csrf
+                                                <?php echo csrf_field(); ?>
 
-                                                @method('PUT')
+                                                <?php echo method_field('PUT'); ?>
 
                                                 <input
                                                     type="number"
                                                     name="quantity"
-                                                    value="{{ $item->kuantitas }}"
+                                                    value="<?php echo e($item->kuantitas); ?>"
                                                     min="1"
-                                                    max="{{ $item->produk->stok + $item->kuantitas }}"
+                                                    max="<?php echo e($item->produk->stok + $item->kuantitas); ?>"
                                                     class="form-control form-control-sm"
                                                     onchange="this.form.submit()"
                                                 >
 
                                             </form>
 
-                                        @else
+                                        <?php else: ?>
 
                                             <span>
-                                                {{ $item->kuantitas }}
+                                                <?php echo e($item->kuantitas); ?>
+
                                             </span>
 
-                                        @endif
+                                        <?php endif; ?>
 
                                     </td>
 
 
-                                    {{-- =================================================
-                                        SUBTOTAL
-                                    ================================================== --}}
+                                    
                                     <td>
 
-                                        Rp {{ number_format($item->subtotal, 0, ',', '.') }}
+                                        Rp <?php echo e(number_format($item->subtotal, 0, ',', '.')); ?>
+
 
                                     </td>
 
 
-                                    {{-- =================================================
-                                        AKSI
-                                    ================================================== --}}
+                                    
                                     <td>
 
-                                        @if ($sale->status === 'OPEN' && $item->produk)
+                                        <?php if($sale->status === 'OPEN' && $item->produk): ?>
 
                                             <form
                                                 method="POST"
-                                                action="{{ route('itempenjualan.destroy', $item->id) }}"
+                                                action="<?php echo e(route('itempenjualan.destroy', $item->id)); ?>"
                                                 onsubmit="return confirm('Hapus produk ini dari keranjang?')"
                                             >
 
-                                                @csrf
+                                                <?php echo csrf_field(); ?>
 
-                                                @method('DELETE')
+                                                <?php echo method_field('DELETE'); ?>
 
                                                 <button
                                                     type="submit"
@@ -358,13 +350,13 @@
 
                                             </form>
 
-                                        @endif
+                                        <?php endif; ?>
 
                                     </td>
 
                                 </tr>
 
-                            @empty
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
 
                                 <tr>
 
@@ -381,7 +373,7 @@
 
                                 </tr>
 
-                            @endforelse
+                            <?php endif; ?>
 
                         </tbody>
 
@@ -390,9 +382,7 @@
                 </div>
 
 
-                {{-- =====================================================
-                    FOOTER KERANJANG
-                ====================================================== --}}
+                
                 <div class="card-footer">
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -403,27 +393,26 @@
 
                         <strong class="fs-5 text-primary">
 
-                            Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}
+                            Rp <?php echo e(number_format($sale->total_pembayaran, 0, ',', '.')); ?>
+
 
                         </strong>
 
                     </div>
 
 
-                    {{-- =================================================
-                        CHECKOUT
-                    ================================================== --}}
-                    @if ($sale->status === 'OPEN')
+                    
+                    <?php if($sale->status === 'OPEN'): ?>
 
                         <form
                             method="POST"
-                            action="{{ route('penjualan.update', $sale->id) }}"
+                            action="<?php echo e(route('penjualan.update', $sale->id)); ?>"
                             onsubmit="return confirm('Yakin ingin checkout transaksi ini?')"
                         >
 
-                            @csrf
+                            <?php echo csrf_field(); ?>
 
-                            @method('PUT')
+                            <?php echo method_field('PUT'); ?>
 
 
                             <select
@@ -450,7 +439,8 @@
                             <button
                                 type="submit"
                                 class="btn btn-success w-100"
-                                {{ $sale->itemPenjualan->count() === 0 ? 'disabled' : '' }}
+                                <?php echo e($sale->itemPenjualan->count() === 0 ? 'disabled' : ''); ?>
+
                             >
 
                                 <i class="bi bi-check-circle me-1"></i>
@@ -461,7 +451,7 @@
 
                         </form>
 
-                    @else
+                    <?php else: ?>
 
                         <button
                             type="button"
@@ -475,23 +465,21 @@
 
                         </button>
 
-                    @endif
+                    <?php endif; ?>
 
 
-                    {{-- =================================================
-                        BATALKAN TRANSAKSI
-                    ================================================== --}}
-                    @if ($sale->status === 'OPEN')
+                    
+                    <?php if($sale->status === 'OPEN'): ?>
 
                         <form
-                            action="{{ route('penjualan.destroy', $sale->id) }}"
+                            action="<?php echo e(route('penjualan.destroy', $sale->id)); ?>"
                             method="POST"
                             onsubmit="return confirm('Yakin ingin membatalkan transaksi? Stok produk akan dikembalikan.')"
                         >
 
-                            @csrf
+                            <?php echo csrf_field(); ?>
 
-                            @method('DELETE')
+                            <?php echo method_field('DELETE'); ?>
 
 
                             <button
@@ -507,7 +495,7 @@
 
                         </form>
 
-                    @endif
+                    <?php endif; ?>
 
                 </div>
 
@@ -519,4 +507,6 @@
 
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\pos_nuy\resources\views/penjualan/pos.blade.php ENDPATH**/ ?>

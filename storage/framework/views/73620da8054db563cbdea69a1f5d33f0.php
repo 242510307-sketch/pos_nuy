@@ -47,6 +47,17 @@
                     </a>
                 </li>
 
+                 
+                <li class="nav-item">
+                    <a
+                        class="nav-link <?php echo e(Request::is('jenis*') ? 'active fw-bold' : ''); ?>"
+                        href="<?php echo e(route('jenis.index')); ?>"
+                    >
+                        <i class="bi bi-tags me-1"></i>
+                        Jenis
+                    </a>
+                </li>
+
                 
                 <li class="nav-item">
                     <a
@@ -66,17 +77,6 @@
                     >
                         <i class="bi bi-cart3 me-1"></i>
                         Penjualan
-                    </a>
-                </li>
-
-                
-                <li class="nav-item">
-                    <a
-                        class="nav-link <?php echo e(Request::is('jenis*') ? 'active fw-bold' : ''); ?>"
-                        href="<?php echo e(route('jenis.index')); ?>"
-                    >
-                        <i class="bi bi-tags me-1"></i>
-                        Jenis
                     </a>
                 </li>
 

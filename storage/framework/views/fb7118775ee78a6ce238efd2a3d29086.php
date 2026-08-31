@@ -188,6 +188,14 @@
         );
         border: 8px solid #fff;
         box-shadow: 0 12px 30px rgba(13,110,253,.20);
+        overflow: hidden;
+    }
+
+    .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
     .profile-avatar i {
@@ -690,7 +698,10 @@
 
                             <div class="profile-avatar">
 
-                                <i class="bi bi-person-fill"></i>
+                                <img
+                                    src="<?php echo e(asset('profile/nurul.jpg')); ?>"
+                                    alt="Foto Nurul Kayla Ramadhani"
+                                >
 
                             </div>
 
@@ -1519,4 +1530,5 @@
 </div>
 
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\pos_nuy\resources\views/tentang.blade.php ENDPATH**/ ?>

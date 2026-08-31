@@ -188,6 +188,14 @@
         );
         border: 8px solid #fff;
         box-shadow: 0 12px 30px rgba(13,110,253,.20);
+        overflow: hidden;
+    }
+
+    .profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
     }
 
     .profile-avatar i {
@@ -698,7 +706,10 @@
 
                             <div class="profile-avatar">
 
-                                <i class="bi bi-person-fill"></i>
+                                <img
+                                    src="{{ asset('profile/nurul.jpg') }}"
+                                    alt="Foto Nurul Kayla Ramadhani"
+                                >
 
                             </div>
 

@@ -82,7 +82,7 @@
                 </div>
                 <h2>Nurul Kayla Ramadhani</h2>
                 <p class="profile-role"><i class="bi bi-code-slash me-1"></i>Web Developer</p>
-                <span class="profile-badge"><i class="bi bi-person-badge me-1"></i>Pengembang NuyMart</span>
+                <span class="profile-badge"><i class="bi bi-person-badge me-1"></i>Pengembang POS Nunuy</span>
                 <p class="profile-note">Selamat datang di halaman profil aplikasi NuyMart. Kelola kebutuhan toko dan transaksi penjualan dengan lebih mudah.</p>
             </section>
         </div>
@@ -120,4 +120,4 @@
 </main>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\pos_nuy\resources\views/tentang.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\pos_nuy\resources\views\tentang.blade.php ENDPATH**/ ?>

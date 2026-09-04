@@ -1,8 +1,8 @@
-@extends('layouts.app')
 
-@section('title', 'Login POS')
 
-@section('content')
+<?php $__env->startSection('title', 'Login POS'); ?>
+
+<?php $__env->startSection('content'); ?>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -80,24 +80,32 @@
         <div class="mb-2">
             <i class="fa-solid fa-store fa-bounce" style="color: #4facfe; font-size: 2.5rem;"></i>
         </div>
-        NuyMart ✨
+        Pos Nurul ✨
         <p class="text-muted fs-6 fw-normal mt-1" style="font-size: 0.85rem !important;">Selamat datang kembali! 👋</p>
     </div>
 
     <div class="card-body px-4">
-        <form action="{{ route('auth') }}" method="POST">
-            @csrf
+        <form action="<?php echo e(route('auth')); ?>" method="POST">
+            <?php echo csrf_field(); ?>
             
             <div class="mb-3 text-start">
                 <label for="exampleInputEmail1" class="form-label fw-bold text-secondary style="font-size: 0.85rem;">
                     <i class="fa-regular fa-envelope me-1" style="color: #4facfe;"></i> Email Address
                 </label>
                 <input type="email" name="email" class="form-control form-control-cute" id="exampleInputEmail1" placeholder="nama@email.com" required>
-                @error('email') 
+                <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> 
                     <div class="badge badge-cute text-wrap w-100 mt-1">
-                        <i class="fa-solid fa-circle-exclamation me-1"></i> {{ $message }}
+                        <i class="fa-solid fa-circle-exclamation me-1"></i> <?php echo e($message); ?>
+
                     </div>
-                @enderror
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="mb-3 text-start">
@@ -105,11 +113,19 @@
                     <i class="fa-solid fa-lock me-1" style="color: #4facfe;"></i> Password
                 </label>
                 <input type="password" name="password" class="form-control form-control-cute" id="exampleInputPassword1" placeholder="••••••••" required>
-                @error('password') 
+                <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> 
                     <div class="badge badge-cute text-wrap w-100 mt-1">
-                        <i class="fa-solid fa-circle-exclamation me-1"></i> {{ $message }}
+                        <i class="fa-solid fa-circle-exclamation me-1"></i> <?php echo e($message); ?>
+
                     </div>
-                @enderror
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="d-flex justify-content-between align-items-center mb-4" style="font-size: 0.8rem;">
@@ -127,4 +143,6 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\laragon\www\pos_nuy\resources\views\login.blade.php ENDPATH**/ ?>

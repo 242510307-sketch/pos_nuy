@@ -326,7 +326,6 @@
                                             Detail
                                         </a>
 
-
                                         {{-- Edit --}}
                                         @can('view', $sale)
 
